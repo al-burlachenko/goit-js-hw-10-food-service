@@ -14,19 +14,19 @@ const Theme = {
   DARK: 'dark-theme',
 };
 let currentTheme = localStorage.getItem('theme');
-let themeToggleCheked = localStorage.getItem('themeToggleCheked');
-console.log(themeToggleCheked);
 
 if (currentTheme) {
   body.classList.add(currentTheme);
-  themeToggle.checked=themeToggleCheked;
 } else body.classList.add(Theme.LIGHT);
+
+if (body.classList.contains(Theme.LIGHT)) {
+    themeToggle.checked=false;
+} else themeToggle.checked=true;
 
 themeToggle.addEventListener('change', onThemeChange);
 menuBoard.innerHTML = eventsTemplate({ items: upcominEvents });
 
 function onThemeChange(event) {
-  console.log(currentTheme);
   if (themeToggle.checked) {
     body.classList.replace(Theme.LIGHT, Theme.DARK);
   } else body.classList.replace(Theme.DARK, Theme.LIGHT);
