@@ -17,11 +17,11 @@ themeToggle.addEventListener('change', onThemeChange);
 menuBoard.innerHTML = eventsTemplate({ items: upcominEvents });
 
 if (!currentTheme) {
-    currentTheme=Theme.LIGHT;
+  currentTheme = Theme.LIGHT;
 }
 body.classList.add(currentTheme);
 
-themeToggle.checked=body.classList.contains(Theme.LIGHT)?false:true;
+themeToggle.checked = body.classList.contains(Theme.LIGHT) ? false : true;
 
 function onThemeChange(event) {
   if (themeToggle.checked) {
@@ -29,6 +29,4 @@ function onThemeChange(event) {
   } else body.classList.replace(Theme.DARK, Theme.LIGHT);
 
   localStorage.setItem('theme', body.classList);
-  localStorage.setItem('themeToggleCheked', themeToggle.checked);
-  currentTheme = body.classList[0];
 }
