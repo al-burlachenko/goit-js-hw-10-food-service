@@ -4,8 +4,6 @@ import upcominEvents from './menu.json';
 import eventsTemplate from './templates/events.hbs';
 import './sass/main.scss';
 
-// console.log(eventsTemplate({ items: upcominEvents }));
-
 const menuBoard = document.querySelector('.js-menu');
 const themeToggle = document.querySelector('#theme-switch-toggle');
 const body = document.querySelector('body');
@@ -15,16 +13,15 @@ const Theme = {
 };
 let currentTheme = localStorage.getItem('theme');
 
-if (currentTheme) {
-  body.classList.add(currentTheme);
-} else body.classList.add(Theme.LIGHT);
-
-if (body.classList.contains(Theme.LIGHT)) {
-    themeToggle.checked=false;
-} else themeToggle.checked=true;
-
 themeToggle.addEventListener('change', onThemeChange);
 menuBoard.innerHTML = eventsTemplate({ items: upcominEvents });
+
+if (!currentTheme) {
+    currentTheme=Theme.LIGHT;
+}
+body.classList.add(currentTheme);
+
+themeToggle.checked=body.classList.contains(Theme.LIGHT)?false:true;
 
 function onThemeChange(event) {
   if (themeToggle.checked) {
