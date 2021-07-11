@@ -1,4 +1,4 @@
-import "../node_modules/normalize.css/normalize.css";
+import '../node_modules/normalize.css/normalize.css';
 
 import upcominEvents from './menu.json';
 import eventsTemplate from './templates/events.hbs';
@@ -13,16 +13,25 @@ const Theme = {
   LIGHT: 'light-theme',
   DARK: 'dark-theme',
 };
+let currentTheme = localStorage.getItem('theme');
+let themeToggleCheked = localStorage.getItem('themeToggleCheked');
+console.log(themeToggleCheked);
+
+if (currentTheme) {
+  body.classList.add(currentTheme);
+  themeToggle.checked=themeToggleCheked;
+} else body.classList.add(Theme.LIGHT);
 
 themeToggle.addEventListener('change', onThemeChange);
-
-body.classList.add(Theme.LIGHT);
 menuBoard.innerHTML = eventsTemplate({ items: upcominEvents });
 
 function onThemeChange(event) {
-  console.log(themeToggle.checked);
+  console.log(currentTheme);
   if (themeToggle.checked) {
-    return body.classList.replace(Theme.LIGHT, Theme.DARK);
-  }
-  return body.classList.replace(Theme.DARK, Theme.LIGHT);
+    body.classList.replace(Theme.LIGHT, Theme.DARK);
+  } else body.classList.replace(Theme.DARK, Theme.LIGHT);
+
+  localStorage.setItem('theme', body.classList);
+  localStorage.setItem('themeToggleCheked', themeToggle.checked);
+  currentTheme = body.classList[0];
 }
